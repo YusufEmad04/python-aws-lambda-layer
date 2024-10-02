@@ -7,4 +7,5 @@ phases:
       - docker build -t lambda-layer . --build-arg VAR1=$AWS_ACCESS_KEY_ID --build-arg VAR2=$AWS_SECRET_ACCESS_KEY
 
   build:
-   - docker run lambda-layer
+    commands:
+      - docker run lambda-layer
