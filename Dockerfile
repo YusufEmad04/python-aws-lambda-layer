@@ -10,6 +10,8 @@ RUN yum install -y unzip && \
     unzip awscliv2.zip && \
     ./aws/install
 
+RUN yum install -y zip unzip
+
 # Set the working directory for the Lambda layer
 WORKDIR /opt
 
