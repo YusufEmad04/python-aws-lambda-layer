@@ -4,6 +4,11 @@ FROM public.ecr.aws/lambda/python:3.11
 ARG VAR1
 ARG VAR2
 
+# Set environment variables for AWS credentials (assumed to be passed during runtime)
+ENV AWS_ACCESS_KEY_ID=$VAR1
+ENV AWS_SECRET_ACCESS_KEY=$VAR2
+ENV AWS_DEFAULT_REGION=eu-west-1
+
 # Install AWS CLI inside the container
 RUN yum install -y unzip && \
     curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip" && \
@@ -23,11 +28,6 @@ RUN pip3 install -r requirements.txt -t python/
 
 # Zip the installed packages to create the layer
 RUN zip -r9 /opt/layer.zip python
-
-# Set environment variables for AWS credentials (assumed to be passed during runtime)
-ENV AWS_ACCESS_KEY_ID=$VAR1
-ENV AWS_SECRET_ACCESS_KEY=$VAR2
-ENV AWS_DEFAULT_REGION=eu-west-1
 
 ENTRYPOINT []
 
