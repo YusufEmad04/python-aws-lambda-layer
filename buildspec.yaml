@@ -19,4 +19,6 @@ phases:
 
   build:
     commands:
+      - echo "this is the access key $AWS_ACCESS_KEY_ID"
+      - echo "this is the secret key $AWS_SECRET
       - docker run lambda-layer
