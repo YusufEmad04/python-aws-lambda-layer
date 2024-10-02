@@ -4,6 +4,14 @@ version: 0.2
 phases:
   pre_build:
     commands:
+      - |
+        # Retrieve secret and extract API keys
+        secret_json=$(aws secretsmanager get-secret-value --secret-id daas-secrets)
+        AWS_ACCESS_KEY_ID=$(echo "$secret_json" | jq -r '.SecretString | fromjson | .AWS_ACCESS_KEY_ID')
+        AWS_SECRET_ACCESS_KEY=$(echo "$secret_json" | jq -r '.SecretString | fromjson | .AWS_SECRET_ACCESS_KEY')
+        # Set environment variables
+        export AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID
+        export AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY
       # echo the access key id and secret access key, write "this is the access key/secret key " before the keys
       - echo "this is the access key $AWS_ACCESS_KEY_ID"
       - echo "this is the secret key $AWS_SECRET_ACCESS_KEY"
