@@ -4,9 +4,9 @@ version: 0.2
 phases:
   pre_build:
     commands:
-      # echo the access key id and secret access key
-      echo "the access key id is $AWS_ACCESS_KEY_ID"
-      echo "the secret access key is $AWS_SECRET_ACCESS_KEY"
+      # echo the access key id and secret access key, write "this is the access key/secret key " before the keys
+      - echo "this is the access key $AWS_ACCESS_KEY_ID"
+      - echo "this is the secret key $AWS_SECRET_ACCESS_KEY"
       - docker build -t lambda-layer . --build-arg VAR1=$AWS_ACCESS_KEY_ID --build-arg VAR2=$AWS_SECRET_ACCESS_KEY
 
   build:
