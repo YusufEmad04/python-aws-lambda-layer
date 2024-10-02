@@ -1,0 +1,10 @@
+# buildspec file for codebuild project
+version: 0.2
+
+phases:
+  pre_build:
+    commands:
+      - docker build -t lambda-layer . --build-arg VAR1=$AWS_ACCESS_KEY_ID --build-arg VAR2=$AWS_SECRET_ACCESS_KEY
+
+  build:
+   - docker run lambda-layer
