@@ -29,5 +29,7 @@ ENV AWS_ACCESS_KEY_ID=$VAR1
 ENV AWS_SECRET_ACCESS_KEY=$VAR2
 ENV AWS_DEFAULT_REGION=eu-west-1
 
+ENTRYPOINT []
+
 # Upload the zip file as a Lambda layer using AWS CLI and output the layer ARN
 CMD ["sh", "-c", "aws lambda publish-layer-version --layer-name my-python-layer --zip-file fileb:///opt/layer.zip --compatible-runtimes python3.11 --description 'Python 3.11 Layer' --query 'LayerVersionArn' --output text"]
